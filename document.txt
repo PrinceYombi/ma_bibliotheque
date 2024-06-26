@@ -1,0 +1,44 @@
+MA_BIBLIOTHEQUE UN PROJET PERSONNEL DANS LE CADRE DE MA FORMATION AVEC PHP/MSSQL
+
+ETAPES DU PROJET : 
+
+    - CE PROJET EST DIVISEE EN 3 PARTIES : MCV MODEL VUE CONTROLEUR
+
+    - LE MODEL PAR LE DOSSIER model, QUI CONTIENT LE FICHIER dataLayer.model.php, CE FICHIER GERE LA CONNEXION A LA BASE DE DONNEES
+        AINSI QUE LES DIFFERENTES REQUETES SQL
+
+    - LA VUE PAR LE DOSSIER view, LE FICHIER view.php GERE L'AFFICHAGE DU PROJET
+
+    - LE CONTROLEUR PAR LE DOSSIER src, TOUT EST GENERE PAR CE DOSSIER, index.php GERE LES REQUETTES UTILISATEURS
+
+        GENERE L'AFFICHAGE, include.php DEFINITIONS DES CONSTANTES, functions.php GERE LES FONCTOIONNALITES DE L'APPLICATION
+
+
+FONCTIONNEMENT DE L'APPLICATION :
+
+    - A l'accueil l'utilisateur se connecte par son email et mot de passe, sinon il peut creer un compte
+
+    - L'adiministrateur peut se connecter par son email et mot de passe qui se trouve dans la base de données
+
+    - Pour un utilisateur, peut voir les livres, il peut faire un emprunt, rechercher un livre par filtre auteur, ou titre
+
+    - Il peut voir son profil, si possible le mettre à jour
+
+    - Puis se déconnecter
+
+    - Un admin, peut ajouter des livres, ajouter des utilisateur, voir les emprunts.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

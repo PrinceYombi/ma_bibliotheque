@@ -1,0 +1,48 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+a{
+    text-decoration: none;
+}
+
+/**************************************ACCUEIL*************************************/
+
+header{
+    width: 100%;
+    position: relative;
+    height: 300px;
+    background-image: url("../images/bookheader.jpg");
+    background-size: cover;
+}
+
+header nav .container-fluid ul li a{
+    font-size: 1.3rem;
+    color: teal;
+}
+header nav .container-fluid ul li a:hover{
+    color: teal;
+}
+
+header .librairy-title{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+}
+header .librairy-title p.title{
+    font-size: 2rem;
+}
+
+/****************************************VOIRBOOK***************************************/
+body > div > div.voir-book{
+    display: flex;
+    gap: 30px;
+}
+body > div > div.voir-book>div{
+    flex: 1;
+    padding: 5px;
+}
