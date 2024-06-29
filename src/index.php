@@ -26,7 +26,7 @@ $action = $url[0];
 $root = array(
 "accueil", "categorie", "livre", "addLivre", "addLivreAction", "retour", "supprimerBook", "voirBook", "user","supprimerUser", "addUser", "addUserAction",
 "voirUser", "createCount", "loginAdmin", "loginUser", "deconnexion", "actionInscription", "profil", "updateProfil",
-"updateProfilAction", "empruntAction", "rendreBookEmprunt", "rechercheBook", "emprunt"
+"updateProfilAction", "empruntAction", "rendreBookEmprunt", "rechercheBook", "emprunt", "updateBook", "updateBookAction"
 );
 
 /**

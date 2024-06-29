@@ -142,6 +142,7 @@ function displaylivre(){
         $result .= '<table class="table caption-top my-3">
             <thead class=" bg-dark text-light">
               <tr>
+                <th scope="col" class="text-primary">Image</th>
                 <th scope="col" class="text-primary">Titre</th>
                 <th scope="col" class="text-primary">Auteur</th>
                 <th scope="col" class="text-primary">Categorie</th>
@@ -154,6 +155,7 @@ function displaylivre(){
         $result = '<table class="table caption-top my-3">
             <thead class=" bg-dark text-light">
               <tr>
+                <th scope="col">Image</th>
                 <th scope="col">Titre</th>
                 <th scope="col">Auteur</th>
                 <th scope="col">Categorie</th>
@@ -185,6 +187,7 @@ function displaylivre(){
         
                 $result .='
                 <tr>
+                    <td><img src="'.BASE_URL.SP."images".SP.$value['image'].'" style="height:80px; width:100%;"/></td>
                     <td>'.strtoupper($value['titre']).'</td>
                     <td>'.strtoupper($value['auteur']).'</td>
                     <td>'.$categorie[$value['categorie']-1]['nom'].'</td>';
@@ -226,6 +229,7 @@ function displaylivre(){
         
                 $result .='
                 <tr>
+                    <td><img src="'.BASE_URL.SP."images".SP.$value['image'].'" style="height:80px; width:100%;"/></td>
                     <td>'.strtoupper($value['titre']).'</td>
                     <td>'.strtoupper($value['auteur']).'</td>
                     <td>'.$categorie[$value['categorie']-1]['nom'].'</td>';
@@ -250,6 +254,7 @@ function displaylivre(){
                 }else{
                     $result .= '
                     <a href="'.BASE_URL.SP."voirBook".SP.$value['id'].'" class="btn btn-block btn-light">Voir</a>
+                    <a href="'.BASE_URL.SP."updateBook".SP.$value['id'].'" class="btn btn-block btn-warning">Modifier</a>
                     <a href="'.BASE_URL.SP."supprimerBook".SP.$value['id'].'" class="supprimer btn btn-block btn-primary">Supprimer</a>
                     ';
                 }
@@ -269,9 +274,11 @@ function displaylivre(){
     
             $result .='
             <tr>
+                <td><img src="'.BASE_URL.SP."images".SP.$value['image'].'" style="height:80px; width:100%;"/></td>
                 <td>'.strtoupper($value['titre']).'</td>
                 <td>'.strtoupper($value['auteur']).'</td>
                 <td>'.$categorie[$value['categorie']-1]['nom'].'</td>';
+                
                 
             if (isset($empruntBook[0]) && $empruntBook[0]['idBook'] == $value['id']) {
                 
@@ -293,6 +300,7 @@ function displaylivre(){
             }else{
                 $result .= '
                  <a href="'.BASE_URL.SP."voirBook".SP.$value['id'].'" class="btn btn-block btn-light">Voir</a>
+                 <a href="'.BASE_URL.SP."updateBook".SP.$value['id'].'" class="btn btn-block btn-warning">Modifier</a>
                  <a href="'.BASE_URL.SP."supprimerBook".SP.$value['id'].'" class="supprimer btn btn-block btn-primary">Supprimer</a>
                 ';
             }
@@ -319,38 +327,40 @@ function displaylivre(){
 function displayaddLivre(){
 
     $result  = '
-        <form action="addLivreAction" method="post" class="mt-4">
-        <div class="form-group mt-3">
-            <label for="">Titre : </label><br />
-            <input type="text" name="titre" value="" class="form-control" id="titre" required/>
+        <form action="addLivreAction" method="post" enctype="multipart/form-data" class="my-3 mx-3">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Titre</label>
+            <input type="text" class="form-control" name="titre" id="exampleFormControlInput1" placeholder="Titre du livre" required>
         </div>
-        <div class="form-group mt-3">
-            <label for="">Auteur : </label><br />
-            <input type="text" name="auteur" value="" class="form-control" id="titre" required/>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Auteur</label>
+            <input type="text" class="form-control" name="auteur" id="exampleFormControlInput1" placeholder="Auteur du livre" required>
         </div>
-        <div class="form-group mt-3">
-            <label for="">Categorie : </label><br />
-            <select name="categorie" class="form-control" id="categorie"> 
-            <option value="1">Manga</option> 
-            <option value="2">Roman</option>  
-            <option value="3">Comics</option>  
-            <option value="4">Sciences</option>  
-            <option value="5 selected">Autres</option>  
-            </select> 
+         <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">Catégorie</label>
+            <select class="form-select" id="inputGroupSelect01" name="categorie">
+                <option selected>Choose...</option>
+                <option value="1">Manga</option>
+                <option value="2">Roman</option>
+                <option value="3">Comics</option>
+                <option value="4">Sciences</option>
+                <option value="5">Autres</option>
+            </select>
         </div>
-        <div class="form-group mt-3">
-            <label for="">Date de parution : </label><br />
-            <input type="date" name="date_parution" value="" class="form-control" id="date_parution" required/>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Date Parution</label>
+            <input type="date" class="form-control" name="date_parution">
         </div>
-        <div class="form-group mt-3">
-            <label for="">Description : </label><br />
-            <input type="text" name="description" value="" class="form-control" id="description" required/>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" required></textarea>
         </div>
-      
-        <button type="submit" class="btn my-3">Ajouter</button>
-        <a type="btn" class="btn btn-primary my-3" href="'.BASE_URL.SP."retour".'">Retour</a>
-        
-        </form> 
+         <div class="mb-3">
+            <input type="file" class="form-control" name="imageBook">
+        </div>
+        <button class="btn btn-success">Ajouter</button>
+        <a href="'.BASE_URL.SP."livre".'" class="btn btn-light me-3">Retour</a>
+    </form> 
         ';
 
         return $result;
@@ -362,14 +372,27 @@ function displayaddLivre(){
 function displayaddLivreAction(){
     global $model;
 
-    $titre = strtoupper($_POST['titre']);
-    $auteur = strtoupper($_POST['auteur']);
-    $categorie = $_POST['categorie'];
-    $date_parution = $_POST['date_parution'];
-    $description = $_POST['description'];
+        if (!empty($_POST) && isset($_POST)) {
+            $titre = strtoupper($_POST['titre']);
+            $auteur = strtoupper($_POST['auteur']);
+            $categorie = $_POST['categorie'];
+            $date_parution = $_POST['date_parution'];
+            $description = $_POST['description'];
+ 
+        }
+
+        if (isset($_FILES['imageBook']['name']) && $_FILES['imageBook']['error'] == 0) {
+            
+            $image = $_FILES['imageBook']['name'];
+            $image_tmp = $_FILES['imageBook']['tmp_name'];
+    
+            
+            $destination = "images"."/".$image;
+            move_uploaded_file($image_tmp, $destination);
+        }
 
     //print_r($date_parution); exit();
-    $dataLivre = $model->addBook($titre, $auteur, $categorie, $date_parution, $description);
+    $dataLivre = $model->addBook($titre, $auteur, $categorie, $date_parution, $description, $image);
     if ($dataLivre) {
         
         header("Location: ".BASE_URL.SP."livre"."");
@@ -378,6 +401,92 @@ function displayaddLivreAction(){
     }
 }
 
+
+function displayupdateBook(){
+    global $model;
+    global $url;
+    $idBook = $url[1];
+    $book = $model->getBook(NULL, $idBook, NULL, NULL);
+
+    //print_r($book[0]); exit();
+
+    $result  = '
+        <form action="'.BASE_URL.SP."updateBookAction".SP.$idBook.'" method="post" enctype="multipart/form-data" class="my-3 mx-3">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Titre</label>
+            <input type="text" class="form-control" name="titre" id="exampleFormControlInput1" placeholder="Titre du livre" required
+            value="'.$book[0]['titre'].'"
+            >
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Auteur</label>
+            <input type="text" class="form-control" name="auteur" id="exampleFormControlInput1" placeholder="Auteur du livre" required
+             value="'.$book[0]['auteur'].'"
+            >
+        </div>
+         <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">Catégorie</label>
+            <select class="form-select" id="inputGroupSelect01" name="categorie">
+                <option selected>Choose...</option>
+                <option value="1">Manga</option>
+                <option value="2">Roman</option>
+                <option value="3">Comics</option>
+                <option value="4">Sciences</option>
+                <option value="5">Autres</option>
+            </select>
+        </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Date Parution</label>
+            <input type="date" class="form-control"  value="'.$book[0]['date_parution'].'" name="date_parution">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" required>
+             '.$book[0]['description'].'
+            </textarea>
+        </div>
+         <div class="mb-3">
+            <input type="file" class="form-control" name="imageBook">
+        </div>
+        <button class="btn btn-primary">Mettre à jour</button>
+        <a href="'.BASE_URL.SP."livre".'" class="btn btn-light me-3">Retour</a>
+    </form> 
+        ';
+
+        return $result;
+}
+
+function displayupdateBookAction(){
+
+    global $model;
+    global $url;
+    $idBook = $url[1];
+
+    $_POST['id'] = $idBook;
+
+    if (isset($_FILES['imageBook']['name']) && $_FILES['imageBook']['error'] == 0) {
+        
+        $image = $_FILES['imageBook']['name'];
+        $image_tmp = $_FILES['imageBook']['tmp_name'];
+
+        
+        $destination = "images"."/".$image;
+        move_uploaded_file($image_tmp, $destination);
+    }
+
+    $_POST['image'] = $image;
+
+    $updateBook = $model->updateInfosBook($_POST);
+
+    if ($updateBook) {
+
+        $result = '<p class="btn btn-success btn-block mt-3">Mise à jour réussie </p>';
+    }else{
+        $result = '<p class="btn btn-danger btn-block">Mise à jour échoué </p>';
+    }
+
+    return $result.displaylivre();
+}
 /**
  * AFFICHAGE DES LIVRES PAR CATEGORIE
  */
@@ -397,6 +506,7 @@ function displaycategorie(){
         $result .= '<table class="table caption-top">
             <thead class=" bg-dark text-light">
               <tr>
+                <th scope="col" class="text-primary">Image</th>
                 <th scope="col" class="text-primary">Titre</th>
                 <th scope="col" class="text-primary">Auteur</th>
                 <th scope="col" class="text-primary">Categorie</th>
@@ -410,6 +520,7 @@ function displaycategorie(){
             
             $result .='
             <tr>
+                <td><img src="'.BASE_URL.SP."images".SP.$value['image'].'" style="height:80px; width:100%;"/></td>
                 <td>'.$value['titre'].'</td>
                 <td>'.$value['auteur'].'</td>
                 <td>'.$categorie[$idCategorie-1]['nom'].'</td>   
@@ -497,7 +608,7 @@ function displayvoirBook(){
             $result ='
             <div class="voir-book my-3 w-70">
                 <div class="card">
-                    <img src="'.BASE_URL.SP."assets".SP."images".SP."book.jpg".'" alt="">
+                    <img src="'.BASE_URL.SP."images".SP.$book['image'].'" alt=""/>
                     <div class="card-body">
                     <h2>Titre : '.$book['titre'].'</h2>
                     <p>Categorie : '.$categorie[$book['categorie']-1]['nom'].'</p>
@@ -548,7 +659,7 @@ function displayvoirBook(){
         $result = '
         <div class="voir-book w-50">
             <div class="card">
-                <img src="'.BASE_URL.SP."assets".SP."images".SP."book.jpg".'" alt="">
+                <img src="'.BASE_URL.SP."images".SP.$book['image'].'" alt=""/>
                 <div class="card-body">
                 <h2>Titre : '.$book['titre'].'</h2>
                 <p>Categorie : '.$categorie[$book['categorie']-1]['nom'].'</p>
@@ -941,7 +1052,8 @@ function displayempruntAction(){
         $dataEmprunt = $model->empruntBook($idUser, $idBook);
 
         if ($dataEmprunt) {
-            header("Location: ".BASE_URL.SP."livre"."");
+            
+            return displaylivre();
 
         }else{
             return FALSE;
@@ -992,28 +1104,31 @@ function displayemprunt(){
             </thead>
             <tbody>';
 
-            foreach ($dataEmprunt as $key => $value) {
-                
-                $user = $model->getUserById($value['idUser']);
-                $book = $model->getBook(NULL,$value['idBook'], NULL, NULL);
-
-                if ($user['sexe'] == 1) {
+            if (!empty($dataEmprunt)) {
         
-                    $user['sexe'] = "Masculin";
-                }elseif ($user['sexe'] == 2) {
+                foreach ($dataEmprunt as $key => $value) {
                     
-                    $user['sexe'] = "Féminin";
+                    $user = $model->getUserById($value['idUser']);
+                    $book = $model->getBook(NULL,$value['idBook'], NULL, NULL);
+    
+                    if ($user['sexe'] == 1) {
+            
+                        $user['sexe'] = "Masculin";
+                    }elseif ($user['sexe'] == 2) {
+                        
+                        $user['sexe'] = "Féminin";
+                    }
+    
+                    $result .='
+                    <tr>
+                        <td>'.$user['nom']." ".$user['prenom'].'</td>
+                        <td>'.$user['sexe'].'</td>
+                        <td>'.$user['ville'].'</td>
+                        <td>'.$book[0]['titre'].'</td>
+                        <td>'.$book[0]['auteur'].'</td>
+                        <td>'.$value['date_emprunt'].'</td>
+                    ';
                 }
-
-                $result .='
-                <tr>
-                    <td>'.$user['nom']." ".$user['prenom'].'</td>
-                    <td>'.$user['sexe'].'</td>
-                    <td>'.$user['ville'].'</td>
-                    <td>'.$book[0]['titre'].'</td>
-                    <td>'.$book[0]['auteur'].'</td>
-                    <td>'.$value['date_emprunt'].'</td>
-                ';
             }
 
     
@@ -1025,5 +1140,6 @@ function displayemprunt(){
 
         return $result;
 }
+
 
 ?>

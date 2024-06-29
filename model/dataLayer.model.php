@@ -32,9 +32,9 @@ class dataLayer{
      * 
      * $description : description du livre
      */
-    function addBook($titre, $auteur, $categorie, $date_parution, $description){
+    function addBook($titre, $auteur, $categorie, $date_parution, $description, $image){
 
-        $sql = "INSERT INTO book (titre, auteur, categorie, date_parution, description) VALUES (:titre, :auteur, :categorie, :date_parution, :description)";
+        $sql = "INSERT INTO book (titre, auteur, categorie, date_parution, description, image) VALUES (:titre, :auteur, :categorie, :date_parution, :description, :image)";
 
         try {
             $result = $this->connexion->prepare($sql);
@@ -43,7 +43,8 @@ class dataLayer{
                 ":auteur"=>$auteur,
                 ":categorie"=>$categorie,
                 ":date_parution"=>$date_parution,
-                ":description"=>$description
+                ":description"=>$description,
+                ":image"=>$image
             ));
 
             if ($r) {
@@ -392,7 +393,7 @@ class dataLayer{
      */
     function empruntBook($idUser, $idBook){
 
-        $sql = "INSERT INTO emprunt_livre (idUser, idBook) VALUES(:idUser, :idBook)";
+        $sql = "INSERT INTO emprunt_book (idUser, idBook) VALUES(:idUser, :idBook)";
 
         try {
             
@@ -422,7 +423,7 @@ class dataLayer{
     function getEmpruntBook($idBook=NULL, $idUser=NULL){
 
         
-        $sql = "SELECT * FROM emprunt_livre ";
+        $sql = "SELECT * FROM emprunt_book ";
         
         try {
           
@@ -453,7 +454,7 @@ class dataLayer{
      */
     function deleteBookEmprunt($idBook){
 
-        $sql = "DELETE FROM emprunt_livre WHERE idBook = :idBook";
+        $sql = "DELETE FROM emprunt_book WHERE idBook = :idBook";
 
         try {
             $result = $this->connexion->prepare($sql);
@@ -470,6 +471,41 @@ class dataLayer{
             return FALSE;
         }
     }
+
+    /**
+     * METTRE A JOUR LES INFOS DU LIVRE
+     */
+    function updateInfosBook($newInfos){
+
+        $sql = "UPDATE book SET ";
+        $idBook = $newInfos['id'];
+        unset($newInfos['id']);
+
+        try {
+            
+            foreach ($newInfos as $key => $value) {
+                $value = stripslashes($value);
+                $sql .= " $key = '$value' ,";
+            }
+
+            $sql = substr($sql,0,-1);
+            $sql .= " WHERE id=:id";
+            //print_r($sql); exit();
+            $result = $this->connexion->prepare($sql);
+            $r = $result->execute(array(":id"=>$idBook));
+
+            if ($r) {
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+
+        } catch (\Throwable $th) {
+            
+            return NULL;
+        }
+    }
+
 }
 
 

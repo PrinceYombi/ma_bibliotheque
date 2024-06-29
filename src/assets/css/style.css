@@ -12,7 +12,7 @@ header{
     width: 100%;
     position: relative;
     height: 300px;
-    background-image: url("../images/bookheader.jpg");
+    background-image: url("../../images/bookheader.jpg");
     background-size: cover;
 }
 
